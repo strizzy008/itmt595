@@ -42,25 +42,25 @@ mongoose
   });
 
 // Redis caching server connection
-const redisClient = redis.createClient({
-  host: keys.redisIp,
-  port: keys.port
-});
+//const redisClient = redis.createClient({
+ // host: keys.redisIp,
+  //port: keys.port
+//});
 
-redisClient.auth(keys.redisPassword, (error, reply) => {
-  if (error) console.log(error);
-  reply === 'OK'
-    ? console.log('[REDIS]: Redis connection authenticated')
-    : console.log('[REDIS]: Redis connection not authenticated');
-});
+//redisClient.auth(keys.redisPassword, (error, reply) => {
+ // if (error) console.log(error);
+  //reply === 'OK'
+   // ? console.log('[REDIS]: Redis connection authenticated')
+   // : console.log('[REDIS]: Redis connection not authenticated');
+//});
 
-redisClient.on('ready', () => {
-  console.log('[REDIS]: Redis is ready');
-});
+//redisClient.on('ready', () => {
+ // console.log('[REDIS]: Redis is ready');
+//});
 
-redisClient.on('error', () => {
-  console.log('[REDIS]: Error in Redis');
-});
+//redisClient.on('error', () => {
+ // console.log('[REDIS]: Error in Redis');
+//});
 
 // Test Users
 const User = require('./models/User');
