@@ -7,4 +7,6 @@ RUN apt install net-tools
 RUN apt-get purge nginx-common -y
 RUN apt-get install nginx -y
 RUN ln -s /etc/nginx/sites-available/reverse-proxy.conf /etc/nginx/sites-enabled/reverse-proxy.conf
-RUN echo "192.168.50.11  nginx-web-server" >> /etc/hosts                         
+ADD ./hostsConfig.sh /tmp/hostsConfig.sh
+RUN chmod +x /tmp/hostsConfig.sh
+RUN sh /tmp/hostsConfig.sh
