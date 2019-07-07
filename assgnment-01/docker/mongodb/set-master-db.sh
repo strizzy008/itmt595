@@ -4,9 +4,8 @@ echo "192.168.50.14  mongodb-rep1-server" >> /etc/hosts
 echo "192.168.50.15  redis-caching-server" >> /etc/hosts
 
 # Create mongodb config
-sudo chown vagrant /etc/mongod.conf
 
-sudo cat <<EOT > /etc/mongod.conf
+cat <<EOT > /etc/mongod.conf
 # mongod.conf
 
 # for documentation of all options, see:
@@ -55,7 +54,7 @@ setParameter:
    enableLocalhostAuthBypass: false
 EOT
 
-sudo cat <<EOT > ~/rsInit.js
+cat <<EOT > ~/rsInit.js
 rs.initiate()
 rs.status()
 cfg = rs.conf()
@@ -64,7 +63,7 @@ cfg.members[1].priority = 0
 rs.reconfig(cfg, {force: true})
 EOT
 
-sudo cat <<EOT > ~/addUsers.js
+cat <<EOT > ~/addUsers.js
 rs.add( { host: "mongodb-rep1-server:27017", priority: 0, votes: 0 } )
 db = db.getSiblingDB("admin");
 db.createUser({
@@ -83,10 +82,10 @@ db.createCollection("sample");
 db.sample.insert({ word: "hi" });
 EOT
 
-sudo mongod --fork --logpath /var/log/mongodb.log --config /etc/mongod.conf --replSet rs0
+mongod --fork --logpath /var/log/mongodb.log --config /etc/mongod.conf --replSet rs0
 
-sudo mongo --host mongodb-server ~/rsInit.js
-sudo mongo --host mongodb-server ~/addUsers.js
+mongo --host mongodb-server ~/rsInit.js
+mongo --host mongodb-server ~/addUsers.js
 
-sudo kill -9 $(pidof mongod)
+kill -9 $(pidof mongod)
 echo "[MOGODB] Set master database..."

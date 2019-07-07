@@ -10,7 +10,4 @@ RUN echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-
 RUN cat /etc/apt/sources.list.d/mongodb-org-4.0.list
 RUN apt-get -y update
 RUN apt-get install -y mongodb-org
-ADD ./set-master-db.sh .
-RUN chmod +x ./set-master-db.sh
-RUN ./set-master-db.sh
 
