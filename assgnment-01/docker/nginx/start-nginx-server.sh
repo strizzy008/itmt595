@@ -84,6 +84,3 @@ mv /etc/ssl/certs/nginx-selfsigned.crt /etc/ssl/certs/nginx-selfsigned.conf
 
 # Start nginx web server
 systemctl stop nginx.service
-nginx
-
-echo "[NGINX] server running..."
