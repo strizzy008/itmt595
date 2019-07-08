@@ -2,13 +2,13 @@
 #Self signed cert
 #https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04
 
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=US/ST=Illinois/L=Chicago/O=IIT-Company/OU=Org/CN=192.168.50.11"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=US/ST=Illinois/L=Chicago/O=IIT-Company/OU=Org/CN=web01"
 # While we are using OpenSSL, we should also create a strong Diffie-Hellman group, which is used in negotiating Perfect Forward Secrecy with clients.
 
-sudo openssl dhparam -dsaparam -out /etc/nginx/dhparam.pem 2048
+openssl dhparam -dsaparam -out /etc/nginx/dhparam.pem 2048
 
-sudo chmod 777 /etc/nginx/snippets/
-sudo cat <<EOT > /etc/nginx/snippets/self-signed.conf
+chmod 777 /etc/nginx/snippets/
+cat <<EOT > /etc/nginx/snippets/self-signed.conf
 ssl_certificate /etc/ssl/certs/nginx-selfsigned.conf;
 ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 EOT
@@ -37,14 +37,14 @@ add_header X-Content-Type-Options nosniff;
 add_header X-XSS-Protection "1; mode=block";
 EOT
 
-sudo chown vagrant /etc/nginx/sites-available/
-sudo unlink /etc/nginx/sites-enabled/default
+chown vagrant /etc/nginx/sites-available/
+unlink /etc/nginx/sites-enabled/default
 
 cd /etc/nginx/sites-available
-sudo touch reverse-proxy.conf
+touch reverse-proxy.conf
 
 # Give ownership over file
-sudo chown vagrant /etc/nginx/sites-available/reverse-proxy.conf
+#sudo chown vagrant /etc/nginx/sites-available/reverse-proxy.conf
 
 # Create reverse proxy config
 # https://www.scaleway.com/docs/how-to-configure-nginx-reverse-proxy/
@@ -57,7 +57,7 @@ server {
 
     server_name nginx-web-server;
     location / {
-        proxy_pass http://node-application-server:8080;
+        proxy_pass http://node:8080;
         proxy_http_version 1.1;
         proxy_set_header Connection 'upgrade';
     }
@@ -75,17 +75,15 @@ EOT
 # }
 # EOT
 
-
-
 # Rename file in /etc/ssl/certs
-sudo mv /etc/ssl/certs/nginx-selfsigned.crt /etc/ssl/certs/nginx-selfsigned.conf
+mv /etc/ssl/certs/nginx-selfsigned.crt /etc/ssl/certs/nginx-selfsigned.conf
 
 #Allow HTTPS traffic
-sudo ufw allow 'Nginx Full'
-sudo ufw delete allow 'Nginx HTTP'
+#sudo ufw allow 'Nginx Full'
+#sudo ufw delete allow 'Nginx HTTP'
 
 # Start nginx web server
-sudo systemctl stop nginx.service
-sudo nginx
+systemctl stop nginx.service
+nginx
 
 echo "[NGINX] server running..."
