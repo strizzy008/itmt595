@@ -1,0 +1,27 @@
+version: '3'
+services:
+
+        web:
+                image: web01 
+                command: nginx
+                expose:
+                - "80:80"
+
+        node:
+                image: node
+                expose:
+                 - 8080
+
+        mongodb: 
+                image: mongodb
+                expose:
+                 - 27017
+
+        mongodb-rep:
+                image: mongodb-rep
+                expose: 
+                 - 27018
+        Redis:
+               image: rediscache
+
+
