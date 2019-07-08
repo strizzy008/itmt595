@@ -40,8 +40,8 @@ http
     res.writeHead(200, { "Content-Type": "text/plain" });
     res.end("Hello World\n");
   })
-  .listen(8080, "192.168.50.12");
-console.log("Server running at http://192.168.50.12:8080/");
+  .listen(8080, "node");
+console.log("Server running at http://node:8080/");
 EOT
 
 # Installing PM2 which is a process manager for node applications
@@ -63,3 +63,13 @@ npm install passport-google-oauth -g
 cd ~
 wget https://my-netdata.io/kickstart.sh 
 bash kickstart.sh --dont-wait
+
+sleep 10
+
+git clone https://github.com/strizzy008/itmt595.git
+
+cd itmt595/vm/app/server; npm run npm-install-linux
+pm2 stop 0
+NODE_ENV=production pm2 start server.js
+
+
