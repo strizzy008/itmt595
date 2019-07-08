@@ -4,7 +4,7 @@
   "description": "Private team repo for ITMT 430",
   "main": "index.js",
   "scripts": {
-    "npm-install-linux": "sudo npm config set bin-links false; sudo npm install",
+    "npm-install-linux": "npm config set bin-links false; npm install",
     "npm-install-windows": "npm install && (cd ../client && npm install)",
     "start": "node server.js",
     "production-server": "NODE_ENV=production exec pm2 start server.js",
@@ -15,7 +15,7 @@
     "dev": "concurrently \"npm run dev-server\" \"npm run client\"",
     "dev-linux": "concurrently \"npm run dev-server-linux\" \"npm run client\"",
     "setup-dev": "npm run npm-install-windows && npm run dev",
-    "setup-dev-linux": "sudo npm run npm-install-linux; sudo npm run dev-server",
+    "setup-dev-linux": " npm run npm-install-linux; npm run dev-server",
     "postbuild-script": "npm run build --prefix ../client",
     "apidoc-build": "npx apidoc -i routes/api/ -o ../../docs",
     "test": "echo \"Error: no test specified\" && exit 1"
