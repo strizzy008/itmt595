@@ -37,7 +37,7 @@ add_header X-Content-Type-Options nosniff;
 add_header X-XSS-Protection "1; mode=block";
 EOT
 
-chown vagrant /etc/nginx/sites-available/
+#chown vagrant /etc/nginx/sites-available/
 unlink /etc/nginx/sites-enabled/default
 
 cd /etc/nginx/sites-available
@@ -50,7 +50,7 @@ touch reverse-proxy.conf
 # https://www.scaleway.com/docs/how-to-configure-nginx-reverse-proxy/
 cat <<EOT > /etc/nginx/sites-available/reverse-proxy.conf
 server {
-    listen nginx-web-server:443 ssl;
+    listen web01:443 ssl;
     listen [::]:443 ssl;
     include snippets/self-signed.conf;
     include snippets/ssl-params.conf;
@@ -83,4 +83,4 @@ mv /etc/ssl/certs/nginx-selfsigned.crt /etc/ssl/certs/nginx-selfsigned.conf
 #sudo ufw delete allow 'Nginx HTTP'
 
 # Start nginx web server
-systemctl stop nginx.service
+
