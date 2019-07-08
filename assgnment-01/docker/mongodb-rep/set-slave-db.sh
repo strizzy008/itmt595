@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "192.168.50.14  mongodb-rep1-server" >> /etc/hosts
-echo "192.168.50.15  redis-caching-server" >> /etc/hosts
+#echo "192.168.50.14  mongodb-rep1-server" >> /etc/hosts
+#echo "192.168.50.15  redis-caching-server" >> /etc/hosts
 
 # Create mongodb config
 
@@ -30,7 +30,7 @@ systemLog:
 # network interfaces
 net:
   port: 27017
-  bindIp: mongodb-rep1-server
+  bindIp: localhost
 
 
 # how the process runs
@@ -64,8 +64,8 @@ db.getMongo().setSlaveOk()
 EOT
 
 mongod --fork --logpath /var/log/mongodb.log --config /etc/mongod.conf --replSet rs0 --enableMajorityReadConcern
-mongo --host mongodb-rep1-server ~/rsInit.js
-mongo --host mongodb-rep1-server < ~/setSlave.js
+mongo --host localhost ~/rsInit.js
+mongo --host localhost < ~/setSlave.js
 
 kill -9 $(pidof mongod)
 echo "[MONGODB REP1] Set slave database..."

@@ -29,7 +29,7 @@ systemLog:
 # network interfaces
 net:
   port: 27017
-  bindIp: mongodb-server
+  bindIp: localhost
 
 
 # how the process runs
@@ -64,7 +64,7 @@ rs.reconfig(cfg, {force: true})
 EOT
 
 cat <<EOT > ~/addUsers.js
-rs.add( { host: "mongodb-rep1-server:27017", priority: 0, votes: 0 } )
+rs.add( { host: "mongodb-rep:27017", priority: 0, votes: 0 } )
 db = db.getSiblingDB("admin");
 db.createUser({
   user: "production-root",
@@ -84,8 +84,10 @@ EOT
 
 mongod --fork --logpath /var/log/mongodb.log --config /etc/mongod.conf --replSet rs0
 
-mongo --host mongodb-server ~/rsInit.js
-mongo --host mongodb-server ~/addUsers.js
+mongo --host localhost ~/rsInit.js
+mongo --host localhost ~/addUsers.js
 
 kill -9 $(pidof mongod)
 echo "[MOGODB] Set master database..."
+
+mongod --fork --logpath /var/log/mongodb.log --config /etc/mongod.conf --replSet rs0

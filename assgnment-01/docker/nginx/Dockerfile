@@ -10,4 +10,5 @@ ADD ./start-nginx-server.sh /tmp/start-nginx-server.sh
 RUN chmod +x /tmp/start-nginx-server.sh
 RUN sh /tmp/start-nginx-server.sh
 RUN ln -s /etc/nginx/sites-available/reverse-proxy.conf /etc/nginx/sites-enabled/reverse-proxy.conf
+EXPOSE 80
 #RUN nginx

@@ -12,5 +12,6 @@ RUN apt-get -y update
 RUN apt-get install -y mongodb-org
 ADD ./set-master-db.sh .
 RUN chmod +x ./set-master-db.sh
+EXPOSE 27017
 RUN ./set-master-db.sh
 
