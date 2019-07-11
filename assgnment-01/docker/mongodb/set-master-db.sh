@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "192.168.50.14  mongodb-rep1-server" >> /etc/hosts
-echo "192.168.50.15  redis-caching-server" >> /etc/hosts
 
 # Create mongodb config
 
