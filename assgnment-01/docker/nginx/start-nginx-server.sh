@@ -2,7 +2,7 @@
 #Self signed cert
 #https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04
 
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=US/ST=Illinois/L=Chicago/O=IIT-Company/OU=Org/CN=web01"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=US/ST=Illinois/L=Chicago/O=IIT-Company/OU=Org/CN=web"
 # While we are using OpenSSL, we should also create a strong Diffie-Hellman group, which is used in negotiating Perfect Forward Secrecy with clients.
 
 openssl dhparam -dsaparam -out /etc/nginx/dhparam.pem 2048
@@ -50,7 +50,7 @@ touch reverse-proxy.conf
 # https://www.scaleway.com/docs/how-to-configure-nginx-reverse-proxy/
 cat <<EOT > /etc/nginx/sites-available/reverse-proxy.conf
 server {
-    listen web01:443 ssl;
+    listen web:443 ssl;
     listen [::]:443 ssl;
     include snippets/self-signed.conf;
     include snippets/ssl-params.conf;
