@@ -1,0 +1,40 @@
+version: "3"
+services:
+
+  nginx:
+    image: web
+    ports:
+      - "80:80"
+    networks:
+      - itmt
+  
+   node-app:
+     image: node
+     expose:
+       - 8080
+   networks:
+      - itmt
+
+   mongodb:
+     image: mongodb
+     expose:
+      - 27017
+     networks:
+      - itmt 
+
+   mongodb-rep:
+     image: mongodb-rep
+     expose:
+      - 27017
+     networks: 
+      - itmt
+
+   redis:
+     image: redis
+     expose:
+      - 6379
+     networks:
+      - itmt
+    
+networks: 
+  itmt:
