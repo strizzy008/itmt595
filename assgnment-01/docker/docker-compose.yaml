@@ -3,6 +3,7 @@ services:
 
   nginx:
     image: web
+    command: nginx
     ports:
       - "80:80"
     networks:
