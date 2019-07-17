@@ -71,5 +71,3 @@ git clone https://github.com/strizzy008/itmt595.git
 cd itmt595/vm/app/server; npm run npm-install-linux
 pm2 stop 0
 NODE_ENV=production pm2 start server.js
-
-

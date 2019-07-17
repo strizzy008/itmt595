@@ -50,7 +50,7 @@ touch reverse-proxy.conf
 # https://www.scaleway.com/docs/how-to-configure-nginx-reverse-proxy/
 cat <<EOT > /etc/nginx/sites-available/reverse-proxy.conf
 server {
-    listen web:443 ssl;
+    listen localhost:443 ssl;
     listen [::]:443 ssl;
     include snippets/self-signed.conf;
     include snippets/ssl-params.conf;

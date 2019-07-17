@@ -1,6 +1,6 @@
 FROM ubuntu
 LABEL maintainer="bstrawte@hawk.iit.edu"
-ENV REFRESHED_AT 2019-07-07
+ENV REFRESHED_AT 2019-07-17
 USER root
 RUN apt-get -y update
 RUN apt install net-tools build-essential git curl wget systemd -y
