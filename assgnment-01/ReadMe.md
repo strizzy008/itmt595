@@ -18,7 +18,7 @@ Put Screenshot here
 
 I have 4 built images for the APP. These images utilize the additional scripts within each folder per service. I am able to build the APP however there a couple of failures I have seen and not able to resolve. 
 
-#### First you must build theimages with the dockerfile in each servcies folder. call the images:
+## First you must build theimages with the dockerfile in each servcies folder. call the images:
 
 Node Application - nodeapp
 Nginx Web Proxy - nginx
@@ -27,7 +27,7 @@ Redis Cache - rediscache
 
 e.x : sudo docker build -t="nginx" .     (this assumes you are in the nginx directory) 
 
-### Configuration findings:
+## Configuration findings:
 
 NGINX - the nginx web configuration , when starting nginx, throws a message about the node system that it is proxying for. I am not sure why this is happening as container being build from the node-app image is called node. but the nginx output says it cannot recognize the name. when running docker-compose though the service is being treated as active and not starting/closing.
 
