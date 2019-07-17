@@ -29,7 +29,7 @@ e.x : sudo docker build -t="nginx" .     (this assumes you are in the nginx dire
 
 ###Configuration findings:
 
-NGINX - the nginx web configuration , when starting nginx, throws a message about the node system that it is proxying for. I am not sure why this is happening as container being build from the node-app image is called node. but the nginx output says it cannot recognize the name.
+NGINX - the nginx web configuration , when starting nginx, throws a message about the node system that it is proxying for. I am not sure why this is happening as container being build from the node-app image is called node. but the nginx output says it cannot recognize the name. when running docker-compose though the service is being treated as active and not starting/closing.
 
 ........
 #nginx: [emerg] host not found in upstream "node" in /etc/nginx/sites-enabled/reverse-proxy.conf:9
