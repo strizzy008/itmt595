@@ -1,0 +1,20 @@
+--- 
+version: '3'
+services: 
+  mongodb: 
+    image: mongodb01 
+    expose: 
+     - 27017
+  web: 
+    image: nginx
+    ports: 
+      - "80:80"
+  node: 
+    image: nodeapp
+    expose: 
+      - 8080
+  redis: 
+    image: redis
+    expose: 
+      - 6379
+    command: "systemctl restart redis"

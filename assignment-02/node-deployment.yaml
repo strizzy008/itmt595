@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: node
+  name: node
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: node
+    spec:
+      containers:
+      - image: nodeapp
+        name: node
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1000Mi"
+          requests:
+            cpu: ".25"
+            memory: "954Mi"
+        restartPolicy: Always
+status: {}
